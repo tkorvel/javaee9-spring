@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
@@ -14,8 +15,7 @@ public class FirstController {
 // private static final Logger log = LoggerFactory.getLogger(FirstController.class);
 
 
-
-    @GetMapping("/my-first-page")
+    @GetMapping({"/my-first-page", "/"})
     public String firstPage() {
         log.info("firstPage() method called!!!");
         // looking for html page inside resources/templates
@@ -30,9 +30,24 @@ public class FirstController {
 return "about";
     }
 
-    @GetMapping("/third-page")
+//    @GetMapping("/third-page")
+//    @GetMapping(value = "/third-page")
+//    @GetMapping(value = {"/third-page"},params = {})
+    @GetMapping (value = { "/third-page", "/third-too", "/abcd"})
     public String thirdPage() {
         log.info("thirdPage() method was called!!!");
         return "pages/third-page";
+    }
+
+    // /my-name?name=tanel&surname=korvel
+    // name param with value tanel
+    // surname param with value korvel
+    @GetMapping("/my-name")
+    public String myName(@RequestParam("name") String myName, @RequestParam("surname") String mySurname) {
+        log.info("myName () method was called!!!");
+        log.info("my name is: [{}] and my surname is:[{}]", myName, mySurname);
+        log.info(String.format("my name is: [%] and my surname is:[%]", myName, mySurname));
+
+        return "";
     }
 }
