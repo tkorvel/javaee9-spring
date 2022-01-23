@@ -43,7 +43,8 @@ return "about";
     // name param with value tanel
     // surname param with value korvel
     @GetMapping("/my-name")
-    public String myName(@RequestParam("name") String myName, @RequestParam("surname") String mySurname) {
+    public String myName(@RequestParam(value = "name", defaultValue = "Jaan") String myName,
+                         @RequestParam(value = "surname", defaultValue = "Tamm") String mySurname) {
         log.info("myName () method was called!!!");
         log.info("my name is: [{}] and my surname is:[{}]", myName, mySurname);
         log.info(String.format("my name is: [%] and my surname is:[%]", myName, mySurname));
