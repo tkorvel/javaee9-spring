@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/person")
 public class PersonController {
 
-    public static final String PERSONS_KEY = "personsKey";
+    public static final String PERSONS_KEY = "persons";
 
     @GetMapping("/names")
         public String showListOfPersonsNames(Model data) {
