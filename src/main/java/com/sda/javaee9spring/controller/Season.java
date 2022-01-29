@@ -1,7 +1,7 @@
 package com.sda.javaee9spring.controller;
 
 public enum Season {
-    WINTER ("Beatiful"),
+    WINTER ("Beautiful"),
     SUMMER ("Sunny");
 
     private String description;
