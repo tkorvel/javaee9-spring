@@ -11,5 +11,7 @@
 <ul th:each="person: ${persons}">
     <li th:text="${person.name()}">Richard</li>
 </ul>
+<br>
+<a th:href="@{/persons/details}" href="#">Person details</a>
 </body>
 </html>
