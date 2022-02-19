@@ -4,6 +4,7 @@ import com.sda.javaee9spring.entity.PersonEntity;
 import com.sda.javaee9spring.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,7 @@ public class RealPersonService {
     }
 
     public List<PersonEntity> readAllPersonEntities() {
-         log.info("trying to tread all persons entities");
+        log.info("trying to tread all persons entities");
 
         var result = personRepository.findAll();
         log.info("persons entities read from db: {}", result);
@@ -33,6 +34,19 @@ public class RealPersonService {
         Optional<PersonEntity> maybePerson = personRepository.findById(id);
 
         log.info("found Person entity: [{}]", maybePerson);
-         return maybePerson;
+        return maybePerson;
+    }
+
+    @Transactional
+    public boolean deletePersonEntityById(Long id) {
+        log.info("trying to delete entity by id: [{}]", id);
+
+        boolean result = false;
+        if (personRepository.existsById(id)) {
+            personRepository.deleteById(id);
+            result = true;
+        }
+
+        return result;
     }
 }
