@@ -50,15 +50,34 @@ public class RealPersonService {
         return result;
     }
 
-    public PersonEntity savePerson(PersonEntity entity) {
+    public boolean savePerson(PersonEntity entity) {
+        boolean result = false;
         log.info("entity for saving: [{}]", entity);
-        if (!personRepository.checkDuplicates(entity.getName(), entity.getSurname())) {
+        if (checkIfEntityIsValid(entity) && !personRepository.checkDuplicates(entity.getName(), entity.getSurname())) {
             personRepository.save(entity);
             log.info("entity after saving: [{}]", entity);
+            result = true;
         } else {
-            log.info("duplicate!!!");
+            log.info("not valid object or duplicate one!!!");
+        }
+        return result;
+    }
+
+    private static boolean checkIfEntityIsValid(PersonEntity entity) {
+        boolean result = true;
+        // " John " -> "John"
+        // " "
+        if (entity.getName() == null || entity.getName().isBlank()) {
+            result = false;
+        } else if (entity.getSurname() == null || entity.getSurname().isBlank()) {
+            result = false;
+        } else if (entity.getAge() < 0) {
+            result = false;
         }
 
-            return entity;
-        }
+        log.info("entity: [{}], valid: [{}]", entity, result);
+
+        return result;
     }
+
+}
