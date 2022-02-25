@@ -16,11 +16,11 @@ public class RealPersonService {
 
     private final PersonRepository personRepository;
 
-    private final RestTemplate restTemplate;
+    private final RestTemplate restTemplate = null;
 
-    public RealPersonService(PersonRepository personRepository, RestTemplate restTemplate) {
+    public RealPersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
-        this.restTemplate = restTemplate;
+//        this.restTemplate = restTemplate;
     }
 
     public List<PersonEntity> readAllPersonEntities() {
